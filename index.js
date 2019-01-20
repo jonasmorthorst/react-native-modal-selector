@@ -145,7 +145,7 @@ export default class ModalSelector extends React.Component {
             // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
             this.props.onChange(item);
         }
-        this.setState({ selected: this.props.labelExtractor(item), changedItem: item }, () => {
+        this.setState({ selected: this.props.keyExtractor(item), changedItem: item }, () => {
           if (this.props.closeOnChange)
             this.close();
         });
