@@ -29,7 +29,7 @@ const propTypes = {
     labelExtractor:                 PropTypes.func,
     visible:                        PropTypes.bool,
     closeOnChange:                  PropTypes.bool,
-    initValue:                      PropTypes.string,
+    initValue:                      PropTypes.number,
     animationType:                  Modal.propTypes.animationType,
     style:                          ViewPropTypes.style,
     selectStyle:                    ViewPropTypes.style,
@@ -75,7 +75,7 @@ const defaultProps = {
     componentExtractor:             (item) => item.component,
     visible:                        false,
     closeOnChange:                  true,
-    initValue:                      'Select me!',
+    initValue:                      0,
     animationType:                  'slide',
     style:                          {},
     selectStyle:                    {},
@@ -186,7 +186,8 @@ export default class ModalSelector extends React.Component {
     renderOption = (option, isLastItem, isFirstItem) => {
         const optionComponent = this.props.componentExtractor(option);
         const optionLabel = this.props.labelExtractor(option);
-        const isSelectedItem = optionLabel === this.state.selected;
+        const optionId = this.props.keyExtractor(option);
+        const isSelectedItem = optionId === this.state.selected;
 
         let component = optionComponent || (
           <Text style={[styles.optionTextStyle,this.props.optionTextStyle,isSelectedItem && this.props.selectedItemTextStyle]} {...this.props.optionTextPassThruProps}>
